@@ -1,0 +1,40 @@
+name: JS Affected Areas
+
+on:
+  workflow_call:
+    inputs:
+      results-directory:
+        type: string
+        required: true
+jobs:
+  run:
+    name: Run
+    runs-on: ubuntu-22.04
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install madge
+        run: npm install madge
+      - name: Install octokit
+        run: npm install @octokit/rest@19.0.7
+      - name: Check Affected Areas
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const prValues = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pullNumber: context.payload.pull_request.number,
+            };
+
+            const script = require('./app/scripts/generateModifiedAreasReport.js')
+            script(prValues)
+
+      - name: Save results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: modified_files_${{ github.event.pull_request.head.sha }}
+          path: ${{ inputs.results-directory }}
