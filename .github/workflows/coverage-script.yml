@@ -1,11 +1,6 @@
 name: JS Affected Areas
 
-on:
-  workflow_call:
-    inputs:
-      results-directory:
-        type: string
-        required: true
+on: [push]
 jobs:
   run:
     name: Run
