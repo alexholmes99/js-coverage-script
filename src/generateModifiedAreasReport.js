@@ -8,9 +8,9 @@ const octokit = new Octokit({
 });
 
 const AREA_DICTIONARY = {
-  administration: { label: "A", priority: 1 },
-  lobby: { label: "B", priority: 1 },
-  user: { label: "C", priority: 1 },
+  administration: { label: "ADMINISTRATION", priority: 1 },
+  lobby: { label: "LOBBY", priority: 1 },
+  user: { label: "USER", priority: 1 },
   area: { label: "AREA", priority: 2 },
   container: { label: "AREA", priority: 3 },
 };
