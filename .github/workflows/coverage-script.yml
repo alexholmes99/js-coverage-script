@@ -1,15 +1,10 @@
 name: JS Affected Areas
 
-on:
-  workflow_call:
-    inputs:
-      results-directory:
-        type: string
-        required: true
+on: [push]
 jobs:
   run:
     name: Run
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -23,13 +18,16 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            console.dir(context.repo.owner)
+            console.dir(context.repo.repo)
+            console.dir(context.payload.pull_request)
             const prValues = {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pullNumber: context.payload.pull_request.number,
+              pullNumber: 1,
             };
 
-            const script = require('./app/scripts/generateModifiedAreasReport.js')
+            const script = require('./src/scripts/generateModifiedAreasReport.js')
             script(prValues)
 
       - name: Save results
@@ -37,4 +35,4 @@ jobs:
         if: always()
         with:
           name: modified_files_${{ github.event.pull_request.head.sha }}
-          path: ${{ inputs.results-directory }}
+          path: ./src/test_results

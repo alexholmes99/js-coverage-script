@@ -7,12 +7,12 @@ const octokit = new Octokit({
   auth: process.env.GITHUB_PAT,
 });
 
-const CPW_AREA_DICTIONARY = {
-  administration: { label: "A", priority: 1 },
-  lobby: { label: "B", priority: 1 },
-  user: { label: "C", priority: 1 },
-  area: { label: "AREA", priority: 2 },
-  container: { label: "AREA", priority: 3 },
+const AREA_DICTIONARY = {
+  administration: { label: "ADMINISTRATION", priority: 1 },
+  lobby: { label: "LOBBY", priority: 1 },
+  user: { label: "USER", priority: 1 },
+  index: { label: "AREA", priority: 2 },
+  container: { label: "PAGE", priority: 3 },
 };
 
 async function updatePRDescription(affectedAreas, prValues) {
@@ -65,9 +65,9 @@ function humanReadableFilePaths(affectedAreas) {
   affectedAreas.forEach((area) => {
     let parsedArea = [];
 
-    Object.keys(CPW_AREA_DICTIONARY).forEach((cpwArea) => {
-      if (area.toLowerCase().includes(cpwArea.toLowerCase())) {
-        parsedArea.push(CPW_AREA_DICTIONARY[cpwArea]);
+    Object.keys(AREA_DICTIONARY).forEach((areaDefinition) => {
+      if (area.toLowerCase().includes(areaDefinition.toLowerCase())) {
+        parsedArea.push(AREA_DICTIONARY[areaDefinition]);
       }
     });
 
@@ -110,7 +110,10 @@ async function generateModifiedAreasReport(prValues) {
       });
 
       iterationDependencies = iterationDependencies.filter(
-        (file) => !file.includes(".test")
+        (filePath) =>
+          !["scripts", "modified_areas", ".test"].some((dir) =>
+            filePath.includes(dir)
+          )
       );
 
       if (iterationDependencies.length === 0) {
@@ -145,7 +148,7 @@ async function generateModifiedAreasReport(prValues) {
     updatePRDescription(prBody.join("\n"), prValues);
     // Write modified areas to file
     fs.writeFileSync(
-      "./test_results/modified_areas.json",
+      "./src/test_results/modified_areas.json",
       JSON.stringify(modifiedAreas, null, 2)
     );
   });
