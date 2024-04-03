@@ -111,7 +111,7 @@ async function generateModifiedAreasReport(prValues) {
 
       iterationDependencies = iterationDependencies.filter(
         (filePath) =>
-          !["scripts", "test_results", ".test", ".github"].some((dir) =>
+          !["scripts", "modified_areas", ".test"].some((dir) =>
             filePath.includes(dir)
           )
       );
