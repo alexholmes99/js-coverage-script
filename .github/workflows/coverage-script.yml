@@ -24,7 +24,7 @@ jobs:
             const prValues = {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pullNumber: context.payload.pull_request.number,
+              pullNumber: 1,
             };
 
             const script = require('./app/scripts/generateModifiedAreasReport.js')
