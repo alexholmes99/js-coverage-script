@@ -145,7 +145,7 @@ async function generateModifiedAreasReport(prValues) {
     updatePRDescription(prBody.join("\n"), prValues);
     // Write modified areas to file
     fs.writeFileSync(
-      "./test_results/modified_areas.json",
+      "./src/test_results/modified_areas.json",
       JSON.stringify(modifiedAreas, null, 2)
     );
   });
