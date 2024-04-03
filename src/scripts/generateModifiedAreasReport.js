@@ -11,8 +11,8 @@ const AREA_DICTIONARY = {
   administration: { label: "ADMINISTRATION", priority: 1 },
   lobby: { label: "LOBBY", priority: 1 },
   user: { label: "USER", priority: 1 },
-  area: { label: "AREA", priority: 2 },
-  container: { label: "AREA", priority: 3 },
+  index: { label: "AREA", priority: 2 },
+  container: { label: "PAGE", priority: 3 },
 };
 
 async function updatePRDescription(affectedAreas, prValues) {
@@ -111,7 +111,7 @@ async function generateModifiedAreasReport(prValues) {
 
       iterationDependencies = iterationDependencies.filter(
         (filePath) =>
-          !["scripts", "test_results", ".test"].some((dir) =>
+          !["scripts", "test_results", ".test", ".github"].some((dir) =>
             filePath.includes(dir)
           )
       );
