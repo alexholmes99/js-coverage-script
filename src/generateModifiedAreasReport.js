@@ -65,9 +65,9 @@ function humanReadableFilePaths(affectedAreas) {
   affectedAreas.forEach((area) => {
     let parsedArea = [];
 
-    Object.keys(CPW_AREA_DICTIONARY).forEach((cpwArea) => {
+    Object.keys(AREA_DICTIONARY).forEach((cpwArea) => {
       if (area.toLowerCase().includes(cpwArea.toLowerCase())) {
-        parsedArea.push(CPW_AREA_DICTIONARY[cpwArea]);
+        parsedArea.push(AREA_DICTIONARY[cpwArea]);
       }
     });
 
