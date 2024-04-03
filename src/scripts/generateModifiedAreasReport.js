@@ -65,9 +65,9 @@ function humanReadableFilePaths(affectedAreas) {
   affectedAreas.forEach((area) => {
     let parsedArea = [];
 
-    Object.keys(AREA_DICTIONARY).forEach((cpwArea) => {
-      if (area.toLowerCase().includes(cpwArea.toLowerCase())) {
-        parsedArea.push(AREA_DICTIONARY[cpwArea]);
+    Object.keys(AREA_DICTIONARY).forEach((areaDefinition) => {
+      if (area.toLowerCase().includes(areaDefinition.toLowerCase())) {
+        parsedArea.push(AREA_DICTIONARY[areaDefinition]);
       }
     });
 
@@ -110,7 +110,7 @@ async function generateModifiedAreasReport(prValues) {
       });
 
       iterationDependencies = iterationDependencies.filter(
-        (file) => !file.includes(".test")
+        (file) => !file.includes(".test") && !file.includes("scripts")
       );
 
       if (iterationDependencies.length === 0) {
