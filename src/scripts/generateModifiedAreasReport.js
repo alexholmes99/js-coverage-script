@@ -110,7 +110,10 @@ async function generateModifiedAreasReport(prValues) {
       });
 
       iterationDependencies = iterationDependencies.filter(
-        (file) => !file.includes(".test") && !file.includes("scripts")
+        (filePath) =>
+          !["scripts", "test_results", ".test"].some((dir) =>
+            filePath.includes(dir)
+          )
       );
 
       if (iterationDependencies.length === 0) {
