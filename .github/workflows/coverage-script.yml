@@ -27,7 +27,7 @@ jobs:
               pullNumber: 1,
             };
 
-            const script = require('./app/scripts/generateModifiedAreasReport.js')
+            const script = require('./src/generateModifiedAreasReport.js')
             script(prValues)
 
       - name: Save results
