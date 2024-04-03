@@ -18,6 +18,9 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            console.dir(context.repo.owner)
+            console.dir(context.repo.repo)
+            console.dir(context.payload.pull_request)
             const prValues = {
               owner: context.repo.owner,
               repo: context.repo.repo,
