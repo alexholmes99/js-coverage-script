@@ -35,4 +35,4 @@ jobs:
         if: always()
         with:
           name: modified_files_${{ github.event.pull_request.head.sha }}
-          path: ${{ inputs.results-directory }}
+          path: ./app/test_results
