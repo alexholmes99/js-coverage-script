@@ -7,7 +7,7 @@ const octokit = new Octokit({
   auth: process.env.GITHUB_PAT,
 });
 
-const CPW_AREA_DICTIONARY = {
+const AREA_DICTIONARY = {
   administration: { label: "A", priority: 1 },
   lobby: { label: "B", priority: 1 },
   user: { label: "C", priority: 1 },
